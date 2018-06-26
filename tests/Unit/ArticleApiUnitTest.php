@@ -5,6 +5,7 @@ namespace Tests\Unit;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use App\Article;
 
 class ArticleApiUnitTest extends TestCase
 {
@@ -13,7 +14,7 @@ class ArticleApiUnitTest extends TestCase
      *
      * @return void
      */
-    public function testExample()
+    public function testCreateArticle()
     {
         $data = [
             'title' => $this->faker->sentence,
@@ -21,6 +22,7 @@ class ArticleApiUnitTest extends TestCase
         ];
 
         $this->post(route('articles.store'), $data)
+            ->dump()
             ->assertStatus(201)
             ->assertJson($data);
     }
