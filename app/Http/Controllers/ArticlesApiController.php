@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateArticleRequest;
+use App\Article;
 
 class ArticlesApiController extends Controller
 {
@@ -35,7 +36,7 @@ class ArticlesApiController extends Controller
      */
     public function store(CreateArticleRequest $request)
     {
-        dd('success');
+        return Article::create($request->all());
     }
 
     /**
@@ -46,7 +47,7 @@ class ArticlesApiController extends Controller
      */
     public function show($id)
     {
-        //
+        dd($id);
     }
 
     /**
@@ -55,9 +56,16 @@ class ArticlesApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Article $article)
     {
-        //
+        return response()->json(
+            [
+                'status' => (bool)$article,
+                'data' => $article,
+                'message' => $article ? 'Article Created!' : 'Error Creating Article'
+            ],
+            201
+        );
     }
 
     /**
