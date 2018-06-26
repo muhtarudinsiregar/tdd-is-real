@@ -26,4 +26,24 @@ class ArticleApiUnitTest extends TestCase
             ->assertStatus(201)
             ->assertJson($data);
     }
+
+    /**
+     * A basic test example.
+     *
+     * @return void
+     */
+    public function testEditArticle()
+    {
+        // setup
+        $article = factory(Article::class)->create();
+
+        //exercise
+        $response = $this->get(route('articles.edit', $article->id));
+
+        // verify
+        $response->assertStatus(201);
+        $response->assertJson(['status' => true]);
+        $response->assertJson(['message' => "Article Created!"]);
+        $response->assertJsonStructure(['data' => ['id', 'title', 'content']]);
+    }
 }
