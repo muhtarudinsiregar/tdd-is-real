@@ -47,7 +47,7 @@ class ArticlesApiController extends Controller
      */
     public function show($id)
     {
-        dd($id);
+        //
     }
 
     /**
