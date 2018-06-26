@@ -20,7 +20,7 @@ class ArticleApiUnitTest extends TestCase
             'content' => $this->faker->paragraph
         ];
 
-        $this->post(route('article.store'), $data)
+        $this->post(route('articles.store'), $data)
             ->assertStatus(201)
             ->assertJson($data);
     }
