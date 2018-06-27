@@ -22,7 +22,6 @@ class ArticleApiUnitTest extends TestCase
         ];
 
         $this->post(route('articles.store'), $data)
-            ->dump()
             ->assertStatus(201)
             ->assertJson($data);
     }
@@ -44,6 +43,12 @@ class ArticleApiUnitTest extends TestCase
         $response->assertStatus(201);
         $response->assertJson(['status' => true]);
         $response->assertJson(['message' => "Article Created!"]);
+        $response->assertJson(
+            ['data' => [
+                'title' => $article->title,
+                'content' => $article->content
+            ]]
+        );
         $response->assertJsonStructure(['data' => ['id', 'title', 'content']]);
     }
 }
