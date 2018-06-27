@@ -51,4 +51,24 @@ class ArticleApiUnitTest extends TestCase
         );
         $response->assertJsonStructure(['data' => ['id', 'title', 'content']]);
     }
+
+    public function testShowArticle()
+    {
+        // setup
+        $article = factory(Article::class)->create();
+
+        // exercise
+        $response = $this->get(route('articles.show', ['id' => $article->id]));
+
+        // verify
+        $response->assertStatus(200);
+        $response->assertJson(['status' => true]);
+        $response->assertJson(
+            ['data' => [
+                'id' => $article->id,
+                'title' => $article->title,
+                'content' => $article->content
+            ]]
+        );
+    }
 }

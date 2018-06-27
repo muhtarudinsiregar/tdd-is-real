@@ -45,9 +45,15 @@ class ArticlesApiController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Article $article)
     {
-        //
+        return response()->json(
+            [
+                'status' => (bool)$article,
+                'data' => $article,
+                'message' => $article ? 'Article Created!' : 'Error Creating Article'
+            ]
+        );
     }
 
     /**
